@@ -29,16 +29,11 @@ import domainapp.modules.simple.dom.so.Usuarios;
 public enum Usuario_persona
 implements Persona<Usuario, Usuario_persona.Builder> {
 
-    FOO("Luciano","Sicolo","42402145","11111111", "luciano.sicolo@hotmail.com","Foo.pdf"),
-    BAR("Bar","Sicolo","42402145","11111111", "luciano.sicolo@hotmail.com","Foo.pdf"),
-    BAZ("Baz","Sicolo","42402145","11111111", "luciano.sicolo@hotmail.com","Foo.pdf"),
-    FRODO("Frodo","Sicolo","42402145","11111111", "luciano.sicolo@hotmail.com","Foo.pdf"),
-    FROYO("Froyo","Sicolo","42402145","11111111", "luciano.sicolo@hotmail.com","Foo.pdf"),
-    FIZZ("Fizz","Sicolo","42402145","11111111", "luciano.sicolo@hotmail.com","Foo.pdf"),
-    BIP("Bip","Sicolo","42402145","11111111", "luciano.sicolo@hotmail.com","Foo.pdf"),
-    BOP("Bop","Sicolo","42402145","11111111", "luciano.sicolo@hotmail.com","Foo.pdf"),
-    BANG("Bang","Sicolo","42402145","11111111", "luciano.sicolo@hotmail.com","Foo.pdf"),
-    BOO("Boo","Sicolo","42402145","11111111", "luciano.sicolo@hotmail.com","Foo.pdf");
+    FOO("Luciano","Sicolo","42402145","11111111", "luciano.sicolo@hotmail.com"),
+    BAR("juan","Gomez","42402145","123123", "juan.Gomez@hotmail.com"),
+    BAZ("bruno","perez","42232345","11111111", "luciano.sicolo@hotmail.com"),
+    FRODO("Frodo","gimenez","42412235","11111111", "Frodo.gimenez@hotmail.com");
+  
 
     private final String name;
     private final String nombre;
@@ -46,7 +41,7 @@ implements Persona<Usuario, Usuario_persona.Builder> {
     
         private final String telefono;
     private final String email;
-    private final String contentFileName;
+//    private final String contentFileName;
 
     @Override
     public Builder builder() {
@@ -68,11 +63,11 @@ implements Persona<Usuario, Usuario_persona.Builder> {
 
             val simpleObject = wrap(usuarios).create(persona.name,persona.nombre,persona.documento,persona.telefono,persona.email);
 
-            if (persona.contentFileName != null) {
-                val bytes = toBytes(persona.contentFileName);
-                val attachment = new Blob(persona.contentFileName, "application/pdf", bytes);
-                simpleObject.updateAttachment(attachment);
-            }
+//            if (persona.contentFileName != null) {
+//                val bytes = toBytes(persona.contentFileName);
+//                val attachment = new Blob(persona.contentFileName, "application/pdf", bytes);
+//                simpleObject.updateAttachment(attachment);
+//            }
 
             simpleObject.setLastCheckedIn(clockService.getClock().nowAsLocalDate().plusDays(fakeDataService.ints().between(-10, +10)));
 
