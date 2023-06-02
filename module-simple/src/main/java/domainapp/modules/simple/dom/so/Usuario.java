@@ -212,7 +212,7 @@ public class Usuario implements Comparable<Usuario>, CalendarEventable {
 
 
 	@Action(semantics = IDEMPOTENT, commandPublishing = Publishing.ENABLED, executionPublishing = Publishing.ENABLED)
-	@ActionLayout(associateWith = "name", promptStyle = PromptStyle.INLINE, describedAs = "Updates the name of this object, certain characters ("
+	@ActionLayout(associateWith = "name", promptStyle = PromptStyle.DIALOG_MODAL, describedAs = "Updates the name of this object, certain characters ("
 			+ PROHIBITED_CHARACTERS + ") are not allowed.")
 
 	public Usuario updateName(@Name String name, @Nombre String nombre) {

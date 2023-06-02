@@ -40,7 +40,7 @@ public class Usuarios {
 
     
     @Action(semantics = SemanticsOf.NON_IDEMPOTENT)
-    @ActionLayout(promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    @ActionLayout(promptStyle = PromptStyle.DIALOG_MODAL)
     public Usuario create(
             @Name final String name,
             @Nombre final String nombre,
@@ -53,7 +53,7 @@ public class Usuarios {
 
 
     @Action(semantics = SemanticsOf.SAFE)
-    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_SIDEBAR)
+    @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT, promptStyle = PromptStyle.DIALOG_MODAL)
     public List<Usuario> findByName(
             @Name final String name
             ) {
