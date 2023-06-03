@@ -1,12 +1,9 @@
 package domainapp.modules.simple.dom.so;
 
-
-
-
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.jdo.annotations.Column;
-
+import java.util.Comparator;
 import javax.jdo.annotations.IdentityType;
 import javax.jdo.annotations.NotPersistent;
 import javax.jdo.annotations.PersistenceCapable;
@@ -17,6 +14,8 @@ import javax.jdo.annotations.VersionStrategy;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
@@ -36,6 +35,7 @@ import org.apache.causeway.applib.services.repository.RepositoryService;
 import org.apache.causeway.applib.services.title.TitleService;
 
 
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,10 +44,7 @@ import lombok.ToString;
 
 
 import domainapp.modules.simple.SimpleModule;
-
-
-
-
+import domainapp.modules.simple.types.Modelo;
 
 //@javax.jdo.annotations.PersistenceCapable(identityType=IdentityType.DATASTORE, schema = "simple")
 //@javax.jdo.annotations.DatastoreIdentity(strategy=javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column="id")
@@ -90,11 +87,45 @@ public class Vehiculo implements Comparable<Vehiculo>{
 	private Long id;
 
 
-	@Override
-	public int compareTo(Vehiculo arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
+
+
+//	
+//	   @Version
+//	    @Column(name = "version", allowsNull = "false")
+//	    @PropertyLayout(fieldSetId = "metadata", sequence = "999")
+//	    @Getter @Setter
+//	    private long version;
+
+	
+	   Vehiculo(Usuario Usuario, String Modelo) {
+	        this.usuario = Usuario;
+	        this.modelo = Modelo;
+	    }
+	   
+	   
+	   @ManyToOne(optional = false)
+	    @JoinColumn(name = "usuario_id")
+	    @PropertyLayout(fieldSetId = "name", sequence = "1")
+	    @Getter @Setter
+	    private Usuario usuario;
+	   
+	   @Modelo
+	    @Column(name = "modelo", length = Modelo.MAX_LEN, allowsNull = "false")
+	    @Getter @Setter
+	    @PropertyLayout(fieldSetId = "name", sequence = "2")
+	    private String modelo;
+
+
+
+	   private final static  Comparator<Vehiculo> comparator =
+	            Comparator.comparing(Vehiculo::getUsuario).thenComparing(Vehiculo::getModelo);
+  
+
+	    @Override
+	    public int compareTo( Vehiculo other) {
+	        return comparator.compare(this, other); 
+	    }
 	
 
 }
