@@ -18,6 +18,9 @@ import javax.jdo.annotations.Query;
 import javax.jdo.annotations.Unique;
 import javax.jdo.annotations.Version;
 import javax.jdo.annotations.VersionStrategy;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.springframework.lang.Nullable;
@@ -62,6 +65,17 @@ import domainapp.modules.simple.types.Name;
 import domainapp.modules.simple.types.Nombre;
 import domainapp.modules.simple.types.Notes;
 import domainapp.modules.simple.types.Telefono;
+
+
+
+//@Entity
+//@Table(
+//  schema="Usuario",
+//  uniqueConstraints = {
+//      @UniqueConstraint(name = "Pet__owner_name__UNQ", columnNames = {"id"})
+//  }
+//)
+
 
 
 @PersistenceCapable(
@@ -182,7 +196,7 @@ public class Usuario implements Comparable<Usuario>, CalendarEventable {
             @Column(name = "attachment_bytes")
     })
     @Property()
-    @PropertyLayout(fieldSetId = "content", sequence = "1")
+    @PropertyLayout(fieldSetId = "Content", sequence = "1")
     private Blob attachment;
 
 

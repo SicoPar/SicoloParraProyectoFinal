@@ -11,11 +11,14 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Unique;
 import javax.jdo.annotations.Version;
 import javax.jdo.annotations.VersionStrategy;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 
@@ -52,12 +55,21 @@ import domainapp.modules.simple.types.Modelo;
 //@javax.jdo.annotations.Unique(name = "SimpleObject__name__UNQ", members = { "name" })
 
 
+
+//@Entity
+//@Table(
+//   schema="Vehiculos",
+//   uniqueConstraints = {
+//        @UniqueConstraint(name = "Pet__owner_name__UNQ", columnNames = {"owner_id, name"})
+//    }
+//)
+//
+
+
 @PersistenceCapable(
 	    schema = "simple",
 	    identityType=IdentityType.DATASTORE)
-	@Unique(
-
-	        name = "Vehiculo__Usuario_name__UNQ", members = {"id"})
+	@Unique(name = "Vehiculo__Usuario_name__UNQ", members = {"id"})
 	
 
 
