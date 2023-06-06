@@ -11,7 +11,7 @@ import org.apache.causeway.applib.annotation.CollectionLayout;
 import lombok.RequiredArgsConstructor;
 
 @Collection                                             
-@CollectionLayout(defaultView = "table")
+@CollectionLayout(defaultView = "Vehiculos")
 @RequiredArgsConstructor                                
 public class Usuario_vehiculo {                            
 

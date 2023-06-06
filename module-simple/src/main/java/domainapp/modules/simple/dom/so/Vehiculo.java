@@ -42,12 +42,13 @@ import org.apache.causeway.applib.services.title.TitleService;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
-
-
+import lombok.val;
 import domainapp.modules.simple.SimpleModule;
 import domainapp.modules.simple.types.Modelo;
+import domainapp.modules.simple.types.Patente;
 
 //@javax.jdo.annotations.PersistenceCapable(identityType=IdentityType.DATASTORE, schema = "simple")
 //@javax.jdo.annotations.DatastoreIdentity(strategy=javax.jdo.annotations.IdGeneratorStrategy.IDENTITY, column="id")
@@ -69,7 +70,7 @@ import domainapp.modules.simple.types.Modelo;
 @PersistenceCapable(
 	    schema = "simple",
 	    identityType=IdentityType.DATASTORE)
-	@Unique(name = "Vehiculo__Usuario_name__UNQ", members = {"id"})
+	@Unique(name = "Vehiculo__Usuario_name__UNQ", members = {"patente"})
 	
 
 
@@ -89,16 +90,33 @@ public class Vehiculo implements Comparable<Vehiculo>{
     @Inject @NotPersistent MessageService messageService;
 
 
-
+    public static Vehiculo withName(String patente) {
+		return withName(patente, null
+				);
+	}
     
-	@Id
+	public static Vehiculo withName(String patente, String modelo) {
+		val simpleObject = new Vehiculo();
+		simpleObject.setPatente(patente);
+		simpleObject.setModelo(modelo);
+		
+		return simpleObject;
+	}
+    
+    
+    
+    
+	@Patente
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", allowsNull = "true")
+	@Column(name = "patente", allowsNull = "true")
 	@Getter @Setter                                             
 	@PropertyLayout(fieldSetId = "metadata", sequence = "1")    
-	private Long id;
+	private String patente;
+	
 
+	
 
+	  
 
 
 
@@ -110,28 +128,35 @@ public class Vehiculo implements Comparable<Vehiculo>{
 //	    private long version;
 
 	
-	   Vehiculo(Usuario Usuario, String Modelo) {
+	   Vehiculo(Usuario Usuario, String Modelo,String Patente) {
+		   this.patente=Patente;
 	        this.usuario = Usuario;
 	        this.modelo = Modelo;
 	    }
 	   
 	   
 	   @ManyToOne(optional = false)
-	    @JoinColumn(name = "usuario_id")
-	    @PropertyLayout(fieldSetId = "name", sequence = "1")
+	    @JoinColumn(name = "id")
+	    @PropertyLayout(fieldSetId = "name", sequence = "2")
 	    @Getter @Setter
 	    private Usuario usuario;
+	   
+	   
 	   
 	   @Modelo
 	    @Column(name = "modelo", length = Modelo.MAX_LEN, allowsNull = "false")
 	    @Getter @Setter
-	    @PropertyLayout(fieldSetId = "name", sequence = "2")
+	    @PropertyLayout(fieldSetId = "name", sequence = "3")
 	    private String modelo;
 
 
 
 	   private final static  Comparator<Vehiculo> comparator =
 	            Comparator.comparing(Vehiculo::getUsuario).thenComparing(Vehiculo::getModelo);
+	
+	   static final String NAMED_QUERY__FIND_BY_NAME_LIKE = "SimpleObject.findByNameLike";
+	
+	   static final String NAMED_QUERY__FIND_BY_NAME_EXACT = "SimpleObject.findByNameExact";
   
 
 	    @Override

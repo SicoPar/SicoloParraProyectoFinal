@@ -19,6 +19,7 @@ import lombok.RequiredArgsConstructor;
 
 import domainapp.modules.simple.dom.so.Usuario;
 import domainapp.modules.simple.dom.so.Usuarios;
+import domainapp.modules.simple.dom.so.Vehiculo;
 
 @RestController
 @RequiredArgsConstructor(onConstructor_ = {@Inject})
@@ -33,6 +34,7 @@ class CustomController {
         return call("sven", usuarios::listAll)
                 .orElse(Collections.<Usuario>emptyList());
     }
+  
 
     private <T> Optional<T> call(
             final String username,
