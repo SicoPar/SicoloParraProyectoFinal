@@ -3,6 +3,7 @@ package domainapp.modules.simple.dom.so;
 import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.util.Comparator;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -19,6 +20,10 @@ import javax.jdo.annotations.Unique;
 import javax.jdo.annotations.Version;
 import javax.jdo.annotations.VersionStrategy;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -79,11 +84,10 @@ import domainapp.modules.simple.types.Telefono;
 
 
 @PersistenceCapable(
-    schema = SimpleModule.SCHEMA,
-    identityType=IdentityType.DATASTORE)
-@Unique(
-        name = "SimpleObject__name__UNQ", members = { "name" }
-)
+	    schema = "simple",
+	    identityType=IdentityType.DATASTORE)
+	@Unique(name = "Usuario_name__UNQ", members = {"name"})
+	
 @Queries({
         @Query(
                 name = Usuario.NAMED_QUERY__FIND_BY_NAME_LIKE,
@@ -98,7 +102,7 @@ import domainapp.modules.simple.types.Telefono;
                         "WHERE name == :name"
         )
 })
-@DatastoreIdentity(strategy=IdGeneratorStrategy.IDENTITY, column="id")
+//@DatastoreIdentity(strategy=IdGeneratorStrategy.IDENTITY, column="id")
 @Version(strategy= VersionStrategy.DATE_TIME, column="version")
 @Named(SimpleModule.NAMESPACE + ".SimpleObject")
 @DomainObject(entityChangePublishing = Publishing.ENABLED)
@@ -137,15 +141,18 @@ public class Usuario implements Comparable<Usuario>, CalendarEventable {
 		return getName() + (getNombre() != null ? ", " + getNombre() : "");
 	}
     
-    
+//    
 //	@Id
 //	@GeneratedValue(strategy = GenerationType.AUTO)
-//	@Column(name = "id", allowsNull = "false")
+//	@Column(name = "id", allowsNull = "true")
 //	@Getter @Setter                                             
 //	@PropertyLayout(fieldSetId = "metadata", sequence = "1")    
 //	private Long id;
-//	
-//	
+	
+	@OneToMany(mappedBy="vehiculo")
+	private List<Vehiculo> vehiculos;
+	
+	
 	@Name
 	@Getter
 	@Setter

@@ -72,6 +72,7 @@ public class Usuarios {
 
 
 
+
     @Action(semantics = SemanticsOf.SAFE)
     @ActionLayout(bookmarking = BookmarkPolicy.AS_ROOT)
     public List<Usuario> listAll() {

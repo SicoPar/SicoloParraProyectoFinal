@@ -24,7 +24,7 @@
 										name="Detalles Contacto" />
 									<cpt:fieldSet id="notes" name="Notas" />
 									<cpt:fieldSet name="Detalles" id="details" />
-									<cpt:fieldSet name="Detalles" id="simple" />
+									<cpt:collection id="Vehiculos"/>
 
 								</bs3:col>
 							</bs3:row>
@@ -51,13 +51,16 @@
 				</bs3:col>
 			</bs3:row>
 		</bs3:col>
-		<bs3:col span="12">
-			<bs3:row>
-				<bs3:col span="12">
-				</bs3:col>
-			</bs3:row>
-			<bs3:tabGroup unreferencedCollections="true">
-			</bs3:tabGroup>
+		<bs3:col span="6">
+			   <bs3:tabGroup  unreferencedCollections="true" collapseIfOne="false">
+                <bs3:tab name="Vehiculos">                   
+                    <bs3:row>
+                        <bs3:col span="12">
+                            <cpt:collection id="Vehiculos"/>
+                        </bs3:col>
+                    </bs3:row>
+                </bs3:tab>
+            </bs3:tabGroup>
 		</bs3:col>
 	</bs3:row>
 </bs3:grid>
