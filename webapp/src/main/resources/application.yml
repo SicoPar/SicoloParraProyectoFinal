@@ -123,6 +123,7 @@ resteasy:
     defaultPath: "/restful"
 
 server:
+  
   max-http-header-size: 16KB
 
 spring:
