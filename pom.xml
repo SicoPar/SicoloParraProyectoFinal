@@ -37,13 +37,14 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-data-jpa</artifactId>
 			</dependency>
+			
+		
 			<dependency>
-				<groupId>org.postgresql</groupId>
-				<artifactId>postgresql</artifactId>
-				<version>42.6.0</version>
+				
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-web</artifactId>
 			</dependency>
 
-			
 
 			<!-- this project's own modules -->
 			<dependency>
@@ -56,6 +57,13 @@
 				<groupId>${project.groupId}</groupId>
 				<artifactId>simpleapp-jdo-webapp</artifactId>
 				<version>${project.version}</version>
+			</dependency>
+
+
+		
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-jdbc</artifactId>
 			</dependency>
 
 
@@ -72,6 +80,13 @@
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 			<version>2.4.0</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.6.0</version>
 		</dependency>
 	</dependencies>
 
